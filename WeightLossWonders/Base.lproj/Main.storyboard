@@ -12,7 +12,7 @@
         <scene sceneID="Gp9-um-RVQ">
             <objects>
                 <tabBarController id="Iav-g8-HKC" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tmn-5g-fw4">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tmn-5g-fw4" propertyAccessControl="none">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -28,11 +28,11 @@
             </objects>
             <point key="canvasLocation" x="-575" y="-673"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="5cj-4Q-JEt">
             <objects>
                 <navigationController id="3eL-r9-dEd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="aGh-Hc-Vce"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" selectedImage="person.fill" id="aGh-Hc-Vce"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="blc-St-ltp">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -45,11 +45,11 @@
             </objects>
             <point key="canvasLocation" x="-1657" y="20"/>
         </scene>
-        <!--Item-->
+        <!--Exercise-->
         <scene sceneID="cm4-VS-5SW">
             <objects>
                 <navigationController id="d3C-o0-xQZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="urg-Mc-qRl"/>
+                    <tabBarItem key="tabBarItem" title="Exercise" image="figure.run" catalog="system" selectedImage="figure.run" id="urg-Mc-qRl"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EUQ-nl-8lm">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -62,11 +62,11 @@
             </objects>
             <point key="canvasLocation" x="-750" y="20"/>
         </scene>
-        <!--Item-->
+        <!--Diet-->
         <scene sceneID="vXr-WB-I9T">
             <objects>
                 <navigationController id="gro-pt-zGv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="LRb-vU-kST"/>
+                    <tabBarItem key="tabBarItem" title="Diet" image="fork.knife" catalog="system" selectedImage="fork.knife" id="LRb-vU-kST"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BKn-hM-rDM">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -79,11 +79,11 @@
             </objects>
             <point key="canvasLocation" x="161" y="20"/>
         </scene>
-        <!--Item-->
+        <!--Sleep-->
         <scene sceneID="FYX-0r-bbK">
             <objects>
                 <navigationController id="Hpj-29-Ebi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="xAH-J2-Eb5"/>
+                    <tabBarItem key="tabBarItem" title="Sleep" image="bed.double.fill" catalog="system" selectedImage="bed.double.fill" id="xAH-J2-Eb5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nCk-yV-a6P">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -152,7 +152,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="uoB-qz-qtJ"/>
-                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sleep Recommendations" id="FCY-AN-1mu"/>
                 </viewController>
@@ -162,11 +162,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bed.double.fill" catalog="system" width="128" height="82"/>
+        <image name="figure.run" catalog="system" width="115" height="128"/>
+        <image name="fork.knife" catalog="system" width="94" height="128"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

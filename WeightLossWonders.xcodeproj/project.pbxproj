@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A34DBAC22B745C88002A4166 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34DBAC12B745C88002A4166 /* TabBarViewController.swift */; };
 		A3FCCA9E2B6E3FE80060C131 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCCA9D2B6E3FE80060C131 /* AppDelegate.swift */; };
 		A3FCCAA02B6E3FE80060C131 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCCA9F2B6E3FE80060C131 /* SceneDelegate.swift */; };
 		A3FCCAA22B6E3FE80060C131 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCCAA12B6E3FE80060C131 /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		A34DBABE2B7438FE002A4166 /* WeightLossWonders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeightLossWonders.entitlements; sourceTree = "<group>"; };
+		A34DBAC12B745C88002A4166 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		A3FCCA9A2B6E3FE80060C131 /* WeightLossWonders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeightLossWonders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3FCCA9D2B6E3FE80060C131 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3FCCA9F2B6E3FE80060C131 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				A3FCCA9F2B6E3FE80060C131 /* SceneDelegate.swift */,
 				A3FCCAA12B6E3FE80060C131 /* ViewController.swift */,
 				A3FCCAA32B6E3FE80060C131 /* Main.storyboard */,
+				A34DBAC12B745C88002A4166 /* TabBarViewController.swift */,
 				A3FCCAA62B6E3FEA0060C131 /* Assets.xcassets */,
 				A3FCCAA82B6E3FEA0060C131 /* LaunchScreen.storyboard */,
 				A3FCCAAB2B6E3FEA0060C131 /* Info.plist */,
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A34DBAC22B745C88002A4166 /* TabBarViewController.swift in Sources */,
 				A3FCCAA22B6E3FE80060C131 /* ViewController.swift in Sources */,
 				A3FCCA9E2B6E3FE80060C131 /* AppDelegate.swift in Sources */,
 				A3FCCAA02B6E3FE80060C131 /* SceneDelegate.swift in Sources */,
