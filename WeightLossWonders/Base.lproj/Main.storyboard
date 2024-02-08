@@ -99,7 +99,7 @@
         <!--User Profile-->
         <scene sceneID="J5N-Fa-DWn">
             <objects>
-                <viewController id="BjV-tF-qQ6" sceneMemberID="viewController">
+                <viewController id="BjV-tF-qQ6" customClass="ViewController" customModule="WeightLossWonders" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ChE-96-KJ8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -115,7 +115,7 @@
         <!--Exercise Recommendations-->
         <scene sceneID="O7m-X8-05y">
             <objects>
-                <viewController id="rp6-ZB-TKc" sceneMemberID="viewController">
+                <viewController id="rp6-ZB-TKc" customClass="ViewController" customModule="WeightLossWonders" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DT4-iM-xR0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -131,7 +131,7 @@
         <!--Diet Recommendations-->
         <scene sceneID="M9X-1A-dud">
             <objects>
-                <viewController id="Jzr-QJ-LsB" sceneMemberID="viewController">
+                <viewController id="Jzr-QJ-LsB" customClass="ViewController" customModule="WeightLossWonders" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LOA-kK-cNg">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -147,7 +147,7 @@
         <!--Sleep Recommendations-->
         <scene sceneID="WhB-f2-XK4">
             <objects>
-                <viewController id="NfU-nJ-SVr" sceneMemberID="viewController">
+                <viewController id="NfU-nJ-SVr" customClass="ViewController" customModule="WeightLossWonders" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lur-d5-dhN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
