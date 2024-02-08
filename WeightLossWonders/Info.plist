@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Health records may be updated by the application</string>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>Health records are used to for heuristics to provide recommendations</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Health data is used for comparing daily health metrics to average readings</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

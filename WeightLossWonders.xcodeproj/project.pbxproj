@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A34DBABE2B7438FE002A4166 /* WeightLossWonders.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeightLossWonders.entitlements; sourceTree = "<group>"; };
 		A3FCCA9A2B6E3FE80060C131 /* WeightLossWonders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeightLossWonders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3FCCA9D2B6E3FE80060C131 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3FCCA9F2B6E3FE80060C131 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		A3FCCA9C2B6E3FE80060C131 /* WeightLossWonders */ = {
 			isa = PBXGroup;
 			children = (
+				A34DBABE2B7438FE002A4166 /* WeightLossWonders.entitlements */,
 				A3FCCA9D2B6E3FE80060C131 /* AppDelegate.swift */,
 				A3FCCA9F2B6E3FE80060C131 /* SceneDelegate.swift */,
 				A3FCCAA12B6E3FE80060C131 /* ViewController.swift */,
@@ -440,6 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeightLossWonders/WeightLossWonders.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7HQAZP936V;
@@ -468,6 +471,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeightLossWonders/WeightLossWonders.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7HQAZP936V;
