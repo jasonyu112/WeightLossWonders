@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         createHealthScoreLabel()
         self.perform(#selector(animateProgress), with: nil, afterDelay: 1.0)
         
-        
     }
     @objc func animateProgress(){
         let cP = self.view.viewWithTag(101) as! CircleProgressView
@@ -109,4 +108,3 @@ class ViewController: UIViewController {
     
 
 }
-
