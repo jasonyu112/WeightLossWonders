@@ -25,7 +25,6 @@ class ViewController: UIViewController {
     
     let weeklyGoalOptions = ["Maintain Weight", "Mild Weight Loss (0.5 lb/week)", "Weight Loss (1 lb/week)", "Extreme Weight Loss (2 lbs/week)"]
     let sexOptions = ["Male", "Female", "Other"]
-//    let heightOptions = Array(stride(from: 24, to: 96, by: 1)) // in inches (from 2 ft to 8 ft range)
     
     var weeklyGoalPickerView = UIPickerView()
     var sexPickerView = UIPickerView()
@@ -37,7 +36,7 @@ class ViewController: UIViewController {
     var userHeight: Double?
     var userBMR: Double?
     
-    weak var bmrDelegate: DataDelegate?
+    var exerciseDelegate: DataDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +46,11 @@ class ViewController: UIViewController {
         // Calculates basal metabolic rate
         calculateBMR()
         print("BMR: \(self.userBMR)")
+        
+        // Sets delegate for Exercise page
+        if let exerciseViewController = storyboard?.instantiateViewController(withIdentifier: "Exercise") as? ExerciseViewController {
+            self.exerciseDelegate = exerciseViewController
+        }
         sendDataToOtherController()
         
         // Adds circle progress
@@ -343,8 +347,12 @@ class ViewController: UIViewController {
             UserDefaults.standard.set(editedHeight, forKey: "Height")
         }
         UserDefaults.standard.synchronize()
+        
+        // Re-calculates user BMR based on the updated stats of the user
         calculateBMR()
         print("Updated BMR: \(self.userBMR)")
+        
+        // Sends updated BMR to Exercise View Controller
         sendDataToOtherController()
     }
     
@@ -356,12 +364,11 @@ class ViewController: UIViewController {
         self.view.frame.origin.y = 0 // Move view to original position
     }
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        var secondController = segue.destination as! ExerciseViewController
-    //    }
-        
+    
     func sendDataToOtherController() {
-        self.bmrDelegate?.sendData(data: String(self.userBMR!))
+//        print("DELEGATE: \(self.bmrDelegate)")
+        // Sends BMR to Exercise View Controller
+        self.exerciseDelegate?.sendData(data: String(self.userBMR!))
     }
     
     func calculateBMR(){
@@ -384,4 +391,3 @@ class ViewController: UIViewController {
         self.userBMR = BMR
     }
 }
-
