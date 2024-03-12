@@ -16,26 +16,82 @@ class ExerciseViewController: UIViewController, DataDelegate {
     let healthStore = HKHealthStore()
     
     
+    
+    
+    @IBOutlet weak var remainingCaloriesToBurnLabel: UILabel!
+    
+//    required init(coder decoder: NSCoder) {
+//        print("test")
+//        super.init(coder: decoder)!
+//        print("test again")
+//        
+//        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
+//            destinationVC.exerciseDelegate = self
+//            print("im in here")
+//        }
+//        print("brah")
+//    }
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController
+//        print("PLEASE: \(storyboard)")
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
+//                destinationVC.exerciseDelegate = self
+//                print("im in here: \(destinationVC.exerciseDelegate)")
+//        }
+//        
+//    }
+    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    //    if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
+//        destinationVC.exerciseDelegate = self
+//        print("im in here")
+//    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        print("exercise storyboard: \(storyboard)")
         // Do any additional setup after loading the view.
         loadHKstore()
         
         // Should display "Need to enter values for all entry fields before receiving exercise recommendations
         getActiveCaloriesBurned()
+//        setNumCaloriesToBurn()
+        
+//        print("userWeeklyGoal: \(self.userWeeklyGoal)")
+//        print("remainingCaloriesToBurn: \(self.remainingCaloriesToBurn)")
+//        setRemainingCaloriesToBurn()
+        
+//        if let profileVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
+////            profileVC.exerciseDelegate = self
+//            print("storyboard: \(storyboard)")
+//            self.userWeeklyGoal = profileVC.userWeeklyGoal
+//            print("here: \(self.userWeeklyGoal)")
+//        }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        getActiveCaloriesBurned()
+//        print("userWeeklyGoal: \(self.userWeeklyGoal)")
+//        print("remainingCaloriesToBurn: \(self.remainingCaloriesToBurn)")
+    }
+    
     
     // Receives data sent from Profile page
     func sendToExercise(data: String) {
-        print("received")
+        print("(Exercise View) User Weekly Goal: \(data)")
         self.userWeeklyGoal = data
-//        print("(Exercise View) User BMR: \(self.userBMR)")
-        getActiveCaloriesBurned()
+        
+//        getActiveCaloriesBurned()
+        setNumCaloriesToBurn()
     }
     
     func loadHKstore() {
@@ -68,11 +124,9 @@ class ExerciseViewController: UIViewController, DataDelegate {
         let now = Date()
         let startOfDay = Calendar.current.startOfDay(for: now)
         let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
-//        print("now: \(now)")
-//        print("startOfDay: \(startOfDay)")
         
         let queryActiveEnergy = HKStatisticsQuery(quantityType: activeEnergyType, quantitySamplePredicate: predicate, options: .cumulativeSum) { (_, results, _) in
-            guard let statistics = results else {
+            guard results == nil else {
                 return
             }
             
@@ -86,8 +140,6 @@ class ExerciseViewController: UIViewController, DataDelegate {
     
     func setNumCaloriesToBurn(){
         switch self.userWeeklyGoal! {
-            case "Maintain Weight":
-                self.remainingCaloriesToBurn = 0
             case "Mild Weight Loss (0.5 lb/week)":
                 self.remainingCaloriesToBurn = 250
             case "Weight Loss (1 lb/week)":
@@ -98,6 +150,10 @@ class ExerciseViewController: UIViewController, DataDelegate {
                 self.remainingCaloriesToBurn = 0
         }
         
+        print("self.userWeeklyGoal: \(self.userWeeklyGoal!)")
+        print("self.remainingCaloriesToBurn: \(self.remainingCaloriesToBurn!)")
+        
+//        self.remainingCaloriesToBurnLabel.text = self.userWeeklyGoal!
         // Uses the sedentary or lightly active factor as as my "base" TDEE
 //        let baseTDEE = self.userBMR! * 1.2
         // Adds in the amount of calories you actually burned through exercise
@@ -105,6 +161,7 @@ class ExerciseViewController: UIViewController, DataDelegate {
     }
     
     func setRemainingCaloriesToBurn() {
-        
+        self.remainingCaloriesToBurn = self.remainingCaloriesToBurn! - self.activeEnergyBurned!
+        self.remainingCaloriesToBurnLabel.text = String(self.remainingCaloriesToBurn!)
     }
 }
