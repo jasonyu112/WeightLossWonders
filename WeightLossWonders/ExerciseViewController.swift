@@ -10,6 +10,7 @@ import HealthKit
 
 class ExerciseViewController: UIViewController, DataDelegate {
     var userWeeklyGoal: String?
+    var initialCaloriesToBurn: Double?
     var remainingCaloriesToBurn: Double?
     var activeEnergyBurned: Double?
     
@@ -110,17 +111,17 @@ class ExerciseViewController: UIViewController, DataDelegate {
     func setNumCaloriesToBurn(){
         switch self.userWeeklyGoal! {
             case "Mild Weight Loss (0.5 lb/week)":
-                self.remainingCaloriesToBurn = 250
+                self.initialCaloriesToBurn = 250
             case "Weight Loss (1 lb/week)":
-                self.remainingCaloriesToBurn = 500
+                self.initialCaloriesToBurn = 500
             case "Extreme Weight Loss (2 lbs/week)":
-                self.remainingCaloriesToBurn = 1000
+                self.initialCaloriesToBurn = 1000
             default:
-                self.remainingCaloriesToBurn = 0
+                self.initialCaloriesToBurn = 0
         }
         
         print("self.userWeeklyGoal: \(self.userWeeklyGoal!)")
-        print("self.remainingCaloriesToBurn: \(self.remainingCaloriesToBurn!)")
+        print("self.initialCaloriesToBurn: \(self.initialCaloriesToBurn!)")
         
 //        self.remainingCaloriesToBurnLabel.text = self.userWeeklyGoal!
         // Uses the sedentary or lightly active factor as as my "base" TDEE
@@ -130,7 +131,7 @@ class ExerciseViewController: UIViewController, DataDelegate {
     }
     
     func setRemainingCaloriesToBurn() {
-        self.remainingCaloriesToBurn = self.remainingCaloriesToBurn! - self.activeEnergyBurned!
+        self.remainingCaloriesToBurn = self.initialCaloriesToBurn! - self.activeEnergyBurned!
         print("Remaining Calories To Burn: \(String(self.remainingCaloriesToBurn!))")
         self.remainingCaloriesToBurnLabel.text = String(self.remainingCaloriesToBurn!)
     }
