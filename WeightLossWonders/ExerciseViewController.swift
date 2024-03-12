@@ -20,42 +20,6 @@ class ExerciseViewController: UIViewController, DataDelegate {
     
     @IBOutlet weak var remainingCaloriesToBurnLabel: UILabel!
     
-//    required init(coder decoder: NSCoder) {
-//        print("test")
-//        super.init(coder: decoder)!
-//        print("test again")
-//        
-//        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
-//            destinationVC.exerciseDelegate = self
-//            print("im in here")
-//        }
-//        print("brah")
-//    }
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController
-//        print("PLEASE: \(storyboard)")
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
-//                destinationVC.exerciseDelegate = self
-//                print("im in here: \(destinationVC.exerciseDelegate)")
-//        }
-//        
-//    }
-    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    //    if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
-//        destinationVC.exerciseDelegate = self
-//        print("im in here")
-//    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print("exercise storyboard: \(storyboard)")
@@ -76,12 +40,16 @@ class ExerciseViewController: UIViewController, DataDelegate {
 //            self.userWeeklyGoal = profileVC.userWeeklyGoal
 //            print("here: \(self.userWeeklyGoal)")
 //        }
+//        setRemainingCaloriesToBurn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getActiveCaloriesBurned()
 //        print("userWeeklyGoal: \(self.userWeeklyGoal)")
 //        print("remainingCaloriesToBurn: \(self.remainingCaloriesToBurn)")
+        
+//        getActiveCaloriesBurned()
+        setRemainingCaloriesToBurn()
     }
     
     
@@ -90,8 +58,8 @@ class ExerciseViewController: UIViewController, DataDelegate {
         print("(Exercise View) User Weekly Goal: \(data)")
         self.userWeeklyGoal = data
         
-//        getActiveCaloriesBurned()
         setNumCaloriesToBurn()
+//        setRemainingCaloriesToBurn()
     }
     
     func loadHKstore() {
@@ -124,12 +92,13 @@ class ExerciseViewController: UIViewController, DataDelegate {
         let now = Date()
         let startOfDay = Calendar.current.startOfDay(for: now)
         let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
-        
+//        print("brah")
         let queryActiveEnergy = HKStatisticsQuery(quantityType: activeEnergyType, quantitySamplePredicate: predicate, options: .cumulativeSum) { (_, results, _) in
-            guard results == nil else {
+//            print("please bra: \(results)")
+            guard results != nil else {
                 return
             }
-            
+//            print("please")
             if let sum = results!.sumQuantity() {
                 self.activeEnergyBurned = sum.doubleValue(for: HKUnit.largeCalorie())
                 print("active energy burned: \(self.activeEnergyBurned)")
@@ -162,6 +131,7 @@ class ExerciseViewController: UIViewController, DataDelegate {
     
     func setRemainingCaloriesToBurn() {
         self.remainingCaloriesToBurn = self.remainingCaloriesToBurn! - self.activeEnergyBurned!
+        print("Remaining Calories To Burn: \(String(self.remainingCaloriesToBurn!))")
         self.remainingCaloriesToBurnLabel.text = String(self.remainingCaloriesToBurn!)
     }
 }
