@@ -8,8 +8,8 @@
 import UIKit
 import HealthKit
 
-protocol DataDelegate: AnyObject {
-    func sendData(data: String)
+protocol DataDelegate: class {
+    func sendToExercise(data: String)
 }
 
 class ViewController: UIViewController {
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var heightTextField: UITextField!
     
-    let weeklyGoalOptions = ["Maintain Weight", "Mild Weight Loss (0.5 lb/week)", "Weight Loss (1 lb/week)", "Extreme Weight Loss (2 lbs/week)"]
+    let weeklyGoalOptions = ["Mild Weight Loss (0.5 lb/week)", "Weight Loss (1 lb/week)", "Extreme Weight Loss (2 lbs/week)"]
     let sexOptions = ["Male", "Female", "Other"]
     
     var weeklyGoalPickerView = UIPickerView()
@@ -40,6 +40,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("exerciseDelegate: \(exerciseDelegate)")
+//        print("storyboard: \(storyboard)")
         // Do any additional setup after loading the view.
         loadHKstore()
         
@@ -48,10 +50,9 @@ class ViewController: UIViewController {
         print("BMR: \(self.userBMR)")
         
         // Sets delegate for Exercise page
-        if let exerciseViewController = storyboard?.instantiateViewController(withIdentifier: "Exercise") as? ExerciseViewController {
-            self.exerciseDelegate = exerciseViewController
-        }
-        sendDataToOtherController()
+        
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        sendDataToOtherController()
         
         // Adds circle progress
         addCircleProgress()
@@ -65,6 +66,22 @@ class ViewController: UIViewController {
         
         setUserDefaults()
         initializeTextFields()
+        
+        let parentNav = self.tabBarController?.viewControllers?[1]
+        if let nav = parentNav as? UINavigationController {
+            if nav.visibleViewController is ExerciseViewController{
+                let vc = nav.visibleViewController as? ExerciseViewController
+                vc!.loadViewIfNeeded()
+                self.exerciseDelegate = vc
+            }
+        }
+        
+//        if let exerciseViewController = storyboard?.instantiateViewController(withIdentifier: "Exercise") as? ExerciseViewController {
+//            exerciseViewController.loadViewIfNeeded()
+//            self.exerciseDelegate = exerciseViewController
+//        }
+        
+        sendDataToOtherController()
         
         // Modifies view controller based on keyboard behavior
         configureKeyboard()
@@ -367,8 +384,8 @@ class ViewController: UIViewController {
     
     func sendDataToOtherController() {
 //        print("DELEGATE: \(self.bmrDelegate)")
-        // Sends BMR to Exercise View Controller
-        self.exerciseDelegate?.sendData(data: String(self.userBMR!))
+        // Sends userWeeklyGoal to Exercise View Controller
+        self.exerciseDelegate?.sendToExercise(data: self.userWeeklyGoal!)
     }
     
     func calculateBMR(){
