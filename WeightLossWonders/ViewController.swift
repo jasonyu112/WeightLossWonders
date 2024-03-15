@@ -40,20 +40,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("exerciseDelegate: \(exerciseDelegate)")
-//        print("storyboard: \(storyboard)")
         // Do any additional setup after loading the view.
         loadHKstore()
         
         // Calculates basal metabolic rate
         calculateBMR()
-        print("BMR: \(self.userBMR)")
-        
-        // Sets delegate for Exercise page
-        
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        sendDataToOtherController()
-        
+                
         // Adds circle progress
         addCircleProgress()
         
@@ -67,6 +59,7 @@ class ViewController: UIViewController {
         setUserDefaults()
         initializeTextFields()
         
+        // Sets delegate for Exercise page
         let parentNav = self.tabBarController?.viewControllers?[1]
         if let nav = parentNav as? UINavigationController {
             if nav.visibleViewController is ExerciseViewController{
@@ -75,11 +68,6 @@ class ViewController: UIViewController {
                 self.exerciseDelegate = vc
             }
         }
-        
-//        if let exerciseViewController = storyboard?.instantiateViewController(withIdentifier: "Exercise") as? ExerciseViewController {
-//            exerciseViewController.loadViewIfNeeded()
-//            self.exerciseDelegate = exerciseViewController
-//        }
         
         sendDataToOtherController()
         
@@ -137,10 +125,10 @@ class ViewController: UIViewController {
             
             readData()
             readMostRecentSample()
-            print("Age: \(self.userAge)")
-            print("Weight: \(self.userWeight)")
-            print("Height: \(self.userHeight)")
-            print("Gender: \(self.userSex)")
+//            print("Age: \(self.userAge)")
+//            print("Weight: \(self.userWeight)")
+//            print("Height: \(self.userHeight)")
+//            print("Gender: \(self.userSex)")
             
         }
     }
@@ -196,7 +184,7 @@ class ViewController: UIViewController {
         let queryWeight = HKSampleQuery(sampleType: weightType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
             
             if let result = results?.last as? HKQuantitySample {
-                print("weight => \(result.quantity)")
+//                print("weight => \(result.quantity)")
                 self.userWeight = result.quantity.doubleValue(for: HKUnit.pound())
             }
             group.leave()
@@ -206,7 +194,7 @@ class ViewController: UIViewController {
         let queryHeight = HKSampleQuery(sampleType: heightType, predicate: nil, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, results, error) in
             
             if let result = results?.last as? HKQuantitySample {
-                print("height => \(result.quantity)")
+//                print("height => \(result.quantity)")
                 self.userHeight = result.quantity.doubleValue(for: HKUnit.inch())
             }
             group.leave()
@@ -280,20 +268,20 @@ class ViewController: UIViewController {
             weeklyGoalTextField.text = userDefaultWeeklyGoal
         }
         if let userDefaultSex = UserDefaults.standard.value(forKey: "Sex") as? String {
-            print("Default Sex: \(userDefaultSex)")
+//            print("Default Sex: \(userDefaultSex)")
             sexTextField.text = userDefaultSex
         }
         if let userDefaultAge = UserDefaults.standard.value(forKey: "Age") as? Int {
-            print("Default Age: \(userDefaultAge)")
+//            print("Default Age: \(userDefaultAge)")
             ageTextField.text = String(userDefaultAge)
         }
         if let userDefaultWeight = UserDefaults.standard.value(forKey: "Weight") as? Double {
-            print("Default Weight: \(userDefaultWeight)")
+//            print("Default Weight: \(userDefaultWeight)")
             // Rounds to one decimal place
             weightTextField.text = String(round(userDefaultWeight * 10) / 10.0)
         }
         if let userDefaultHeight = UserDefaults.standard.value(forKey: "Height") as? Double {
-            print("Default Height: \(userDefaultHeight)")
+//            print("Default Height: \(userDefaultHeight)")
             heightTextField.text = String(userDefaultHeight)
         }
         
@@ -367,7 +355,7 @@ class ViewController: UIViewController {
         
         // Re-calculates user BMR based on the updated stats of the user
         calculateBMR()
-        print("Updated BMR: \(self.userBMR)")
+//        print("Updated BMR: \(self.userBMR)")
         
         // Sends updated BMR to Exercise View Controller
         sendDataToOtherController()
