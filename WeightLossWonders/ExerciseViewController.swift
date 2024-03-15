@@ -16,51 +16,33 @@ class ExerciseViewController: UIViewController, DataDelegate {
     
     let healthStore = HKHealthStore()
     
-    
-    
-    
     @IBOutlet weak var remainingCaloriesToBurnLabel: UILabel!
+    @IBOutlet weak var walkCaloriesToBurnLabel: UILabel!
+    @IBOutlet weak var runCaloriesToBurnLabel: UILabel!
+    @IBOutlet weak var strengthTrainingCaloriesToBurnLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print("exercise storyboard: \(storyboard)")
         // Do any additional setup after loading the view.
         loadHKstore()
         
-        // Should display "Need to enter values for all entry fields before receiving exercise recommendations
+        // Should display "Need to enter values for all entry fields before receiving exercise recommendations?
         getActiveCaloriesBurned()
-//        setNumCaloriesToBurn()
-        
-//        print("userWeeklyGoal: \(self.userWeeklyGoal)")
-//        print("remainingCaloriesToBurn: \(self.remainingCaloriesToBurn)")
-//        setRemainingCaloriesToBurn()
-        
-//        if let profileVC = storyboard?.instantiateViewController(withIdentifier: "UserProfile") as? ViewController {
-////            profileVC.exerciseDelegate = self
-//            print("storyboard: \(storyboard)")
-//            self.userWeeklyGoal = profileVC.userWeeklyGoal
-//            print("here: \(self.userWeeklyGoal)")
-//        }
-//        setRemainingCaloriesToBurn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getActiveCaloriesBurned()
-//        print("userWeeklyGoal: \(self.userWeeklyGoal)")
-//        print("remainingCaloriesToBurn: \(self.remainingCaloriesToBurn)")
-        
-//        getActiveCaloriesBurned()
         setRemainingCaloriesToBurn()
+        setExerciseCaloriesToBurn()
     }
     
     
     // Receives data sent from Profile page
     func sendToExercise(data: String) {
-        print("(Exercise View) User Weekly Goal: \(data)")
+//        print("(Exercise View) User Weekly Goal: \(data)")
         self.userWeeklyGoal = data
         
         setNumCaloriesToBurn()
-//        setRemainingCaloriesToBurn()
     }
     
     func loadHKstore() {
@@ -93,16 +75,13 @@ class ExerciseViewController: UIViewController, DataDelegate {
         let now = Date()
         let startOfDay = Calendar.current.startOfDay(for: now)
         let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
-//        print("brah")
         let queryActiveEnergy = HKStatisticsQuery(quantityType: activeEnergyType, quantitySamplePredicate: predicate, options: .cumulativeSum) { (_, results, _) in
-//            print("please bra: \(results)")
             guard results != nil else {
                 return
             }
-//            print("please")
             if let sum = results!.sumQuantity() {
                 self.activeEnergyBurned = sum.doubleValue(for: HKUnit.largeCalorie())
-                print("active energy burned: \(self.activeEnergyBurned)")
+//                print("active energy burned: \(self.activeEnergyBurned)")
             }
         }
         healthStore.execute(queryActiveEnergy)
@@ -120,19 +99,28 @@ class ExerciseViewController: UIViewController, DataDelegate {
                 self.initialCaloriesToBurn = 0
         }
         
-        print("self.userWeeklyGoal: \(self.userWeeklyGoal!)")
-        print("self.initialCaloriesToBurn: \(self.initialCaloriesToBurn!)")
-        
-//        self.remainingCaloriesToBurnLabel.text = self.userWeeklyGoal!
-        // Uses the sedentary or lightly active factor as as my "base" TDEE
-//        let baseTDEE = self.userBMR! * 1.2
-        // Adds in the amount of calories you actually burned through exercise
-//        let finalActivityBMR = baseActivityBMR + caloriesBurned
+//        print("self.userWeeklyGoal: \(self.userWeeklyGoal!)")
+//        print("self.initialCaloriesToBurn: \(self.initialCaloriesToBurn!)")
     }
     
     func setRemainingCaloriesToBurn() {
         self.remainingCaloriesToBurn = self.initialCaloriesToBurn! - self.activeEnergyBurned!
-        print("Remaining Calories To Burn: \(String(self.remainingCaloriesToBurn!))")
-        self.remainingCaloriesToBurnLabel.text = String(self.remainingCaloriesToBurn!)
+        if (self.remainingCaloriesToBurn! < 0) {
+            self.remainingCaloriesToBurn = 0
+        }
+//        print("Remaining Calories To Burn: \(String(self.remainingCaloriesToBurn!))")
+        self.remainingCaloriesToBurnLabel.text = String(roundUp(precision: 1, value: self.remainingCaloriesToBurn!))
+    }
+    
+    func setExerciseCaloriesToBurn() {
+        self.walkCaloriesToBurnLabel.text = String(roundUp(precision: 1,value: self.remainingCaloriesToBurn!/4.5)) // walking at brisk pace equals 3.5 calories per minute
+        self.runCaloriesToBurnLabel.text = String(roundUp(precision: 1,value: self.remainingCaloriesToBurn!/11.1)) // running equals 13.2 calories per minute (happy medium factor that disregards weight)
+        self.strengthTrainingCaloriesToBurnLabel.text = String(roundUp(precision: 1,value: self.remainingCaloriesToBurn!/6.1)) // strength training equals 6.1 calories per minute
+    }
+    
+    func roundUp(precision: Int, value: Double) -> Double {
+        let factor: Double = Double(precision * 10)
+        let roundedUpValue = Double(round(Double(factor) * value)/factor)
+        return roundedUpValue
     }
 }
