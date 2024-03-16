@@ -112,6 +112,7 @@ class ViewController: UIViewController {
         let scoreLabel = self.view.viewWithTag(102) as! UILabel
         cP.setProgressWithAnimation(duration: 1.0, value: ((scoreLabel.text! as NSString).floatValue/100))
     }
+
     
     func loadHKstore(){
         if(HKHealthStore.isHealthDataAvailable()){
@@ -395,4 +396,5 @@ class ViewController: UIViewController {
         }
         self.userBMR = BMR
     }
+
 }
