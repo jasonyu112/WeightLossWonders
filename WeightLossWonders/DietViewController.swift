@@ -38,17 +38,29 @@ class DietViewController: UIViewController{
         totalCalories=0
         setLabel()
     }
-/*
-    @IBAction func logPressed(_ sender: Any){
-        guard let weight = delegate?.userWeight,
-                      let height = delegate?.userHeight,
-                      height != 0 else { return }
-        
-        let BMI = 703 * (weight / (height * height))
-        totalCalories = Int(BMI)
-        setLabel()
+
+    @IBAction func logPressed(_ sender: Any) {
+        if (totalCalories ?? 0>2250){
+            var tempHealthScore = 100
+            var tempx = totalCalories
+            while(tempx! > 2250){
+                tempHealthScore-=1
+                tempx!-=20
+            }
+            self.healthScore = tempHealthScore
+        }
+        else{
+            var tempHealthScore = 100
+            var tempx = totalCalories
+            while(tempx! < 2250){
+                tempHealthScore-=1
+                tempx!+=20
+            }
+            
+            self.healthScore = tempHealthScore
+        }
+        NotificationCenter.default.post(name: NSNotification.Name("diet"), object: healthScore)
     }
-*/
     func setLabel(){
         totalCaloriesLabel.text = String(describing: totalCalories ?? 0)
     }

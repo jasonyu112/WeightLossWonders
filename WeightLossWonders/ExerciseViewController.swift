@@ -13,6 +13,7 @@ class ExerciseViewController: UIViewController, DataDelegate {
     var initialCaloriesToBurn: Double?
     var remainingCaloriesToBurn: Double?
     var activeEnergyBurned: Double?
+    var healthScore: Int? = 0
     
     let healthStore = HKHealthStore()
     
@@ -123,4 +124,17 @@ class ExerciseViewController: UIViewController, DataDelegate {
         let roundedUpValue = Double(round(Double(factor) * value)/factor)
         return roundedUpValue
     }
+    
+    @IBAction func logPressed(_ sender: Any) {
+        var tempHealthScore = 100
+        var tempx = remainingCaloriesToBurn
+        while(tempx!>0){
+            tempx!-=7
+            tempHealthScore-=1
+        }
+        self.healthScore = tempHealthScore
+        NotificationCenter.default.post(name: NSNotification.Name("exercise"), object: healthScore)
+        
+    }
+    
 }

@@ -37,7 +37,12 @@ class ViewController: UIViewController {
     var userBMR: Double?
     
     var exerciseDelegate: DataDelegate?
-    
+    var sleepScore = 50
+    var dietScore = 50
+    var exerciseScore = 50
+    var observerSleep: NSObjectProtocol?
+    var observerDiet: NSObjectProtocol?
+    var observerExercise: NSObjectProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -73,6 +78,31 @@ class ViewController: UIViewController {
         
         // Modifies view controller based on keyboard behavior
         configureKeyboard()
+        observerSleep = NotificationCenter.default.addObserver(forName: NSNotification.Name("sleep"), object: nil, queue: .main, using: {notification in guard let object = notification.object as? Int else{return}
+            self.sleepScore = object
+            let view = self.view.viewWithTag(102) as? UILabel
+            let average = (self.sleepScore+self.dietScore+self.exerciseScore)/3
+            view!.text = "\(average)"
+            self.perform(#selector(self.animateProgress))
+        })
+        observerDiet = NotificationCenter.default.addObserver(forName: NSNotification.Name("diet"), object: nil, queue: .main, using: {notification in guard let object = notification.object as? Int else{return}
+            self.dietScore = object
+            let view = self.view.viewWithTag(102) as? UILabel
+            let average = (self.sleepScore+self.dietScore+self.exerciseScore)/3
+            view!.text = "\(average)"
+            self.perform(#selector(self.animateProgress))
+        })
+        
+        observerExercise = NotificationCenter.default.addObserver(forName: NSNotification.Name("exercise"), object: nil, queue: .main, using: {notification in guard let object = notification.object as? Int else{return}
+            self.exerciseScore = object
+            let view = self.view.viewWithTag(102) as? UILabel
+            let average = (self.sleepScore+self.dietScore+self.exerciseScore)/3
+            view!.text = "\(average)"
+            self.perform(#selector(self.animateProgress))
+            
+        })
+        
+        
     }
     
     
@@ -89,7 +119,8 @@ class ViewController: UIViewController {
         let score = UILabel()
         score.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height/1.9)
         score.textColor = .white
-        score.text = "80"
+        let average = (sleepScore+dietScore+exerciseScore)/3
+        score.text = "\(average)"
         score.textAlignment = .center
         score.font = UIFont.systemFont(ofSize: 50)
         score.tag = 102

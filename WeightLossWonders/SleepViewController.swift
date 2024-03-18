@@ -61,6 +61,7 @@ class SleepViewController: UIViewController{
         
         // Calculate health score based on total hours
         healthScore = calculateHealthScore(hours: totalHours)
+        NotificationCenter.default.post(name: NSNotification.Name("sleep"), object: healthScore)
     }
     
     func calculateHealthScore(hours: Int) -> Int {
